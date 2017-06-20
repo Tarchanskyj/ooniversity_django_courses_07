@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qsc%1_-97#1sr1jso8b!op1gq%7_1sk&y=_zjuku$!m9%2)4na'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -132,6 +132,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+
+STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder", "django.contrib.staticfiles.finders.AppDirectoriesFinder")
+
 ADMINS = (('Tarchanskyj Arthur', 'arthurka.company@gmail.com'))
 
 EMAIL_HOST = 'localhost'
@@ -178,5 +182,10 @@ LOGGING = {
     },
 }
 
+
+try:
+    from .local_settings import *
+except ImportError:
+    print("Warning! local_settings are not defined!")
 
 
